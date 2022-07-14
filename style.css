@@ -31,6 +31,7 @@ main {
     margin-bottom: 10px;
     background-color: rgb(238, 237, 237);
     padding: 30px;
+    min-height: 110px;
 }
 
 .buttonArea {

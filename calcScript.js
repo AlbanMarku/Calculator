@@ -2,13 +2,12 @@ const numButt = document.querySelectorAll("[data-number]");
 const opper = document.querySelectorAll("[data-operation]");
 const mainDisplay = document.querySelector(".mainDisplay");
 const lastDisplay = document.querySelector(".lastDisplay");
+const clearer = document.querySelector("[data-clear]");
 
 
 let displayOutput = "";
 let prevOutput = "";
 let currentOperation = "";
-let firstNumber = "";
-let secondNumber = "";
 
 function add(number1, number2) {
 
@@ -24,6 +23,13 @@ function divide(number1, number2) {
 
 function multiply(number1, number2) {
 
+}
+
+function clear() {
+    displayOutput = "";
+    prevOutput = "";
+    currentOperation = "";
+    printDisplay(prevOutput,displayOutput);
 }
 
 function operate(number1, number2) {
@@ -68,7 +74,7 @@ function storeNumber(opi) {
 function tempMaths(a , b) {
     let calc = a+b;
     calc = calc.toString();
-    currentOperation = "";
+    //currentOperation = "";
     printDisplay(calc, calc);
     prevOutput = calc;
     displayOutput = "";
@@ -104,3 +110,12 @@ opper.forEach(element => {
         element.classList.remove("clicker");
     });
 });
+
+clearer.addEventListener("click", () => {
+    clear();
+    clearer.classList.add("clicker");
+});
+
+clearer.addEventListener("transitionend", () => {
+    clearer.classList.remove("clicker");
+})
