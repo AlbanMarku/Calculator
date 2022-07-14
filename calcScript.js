@@ -47,31 +47,36 @@ function operate(number1, number2) {
 }
 
 function insertNumber(number) {
-    displayOutput = displayOutput + number.toString();
-    printDisplay();
+    number = number.trim();
+    displayOutput = displayOutput.concat(number.toString());
+    printDisplay(prevOutput, displayOutput);
 }
 
 function storeNumber(opi) {
     if(prevOutput !="") {
-        alert("do maths");
         tempMaths(Number(prevOutput), Number(displayOutput));
     } else {
-        alert("don't do maths");
+        console.log(displayOutput);
         prevOutput = displayOutput;
         currentOperation = opi;
-        printDisplay();
+        printDisplay(prevOutput, displayOutput);
         displayOutput = "";
     }
     
 }
 
 function tempMaths(a , b) {
-    alert(a+b);
+    let calc = a+b;
+    calc = calc.toString();
+    currentOperation = "";
+    printDisplay(calc, calc);
+    prevOutput = calc;
+    displayOutput = "";
 }
 
-function printDisplay() {
-    lastDisplay.textContent = prevOutput + currentOperation;
-    mainDisplay.textContent = displayOutput;   
+function printDisplay(prev, cur) {
+    lastDisplay.textContent = prev + currentOperation;
+    mainDisplay.textContent = cur;   
 }
 
 numButt.forEach(element => {
