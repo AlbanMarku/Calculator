@@ -52,13 +52,13 @@ main {
     align-items: center;
     cursor: pointer;
     background-color: aliceblue;
-    transition-duration: 0.1s;
+    transition-duration: 0.06s;
     user-select: none;
 }
 
 .clicker {
     border: 3px solid rgb(5, 197, 197);
-    transform: scale(1.1,1.1);
+    transform: scale(0.9,0.9);
 }
 
 #clear {
