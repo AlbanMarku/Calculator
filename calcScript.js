@@ -7,8 +7,8 @@ const lastDisplay = document.querySelector(".lastDisplay");
 let displayOutput = "";
 let prevOutput = "";
 let currentOperation = "";
-let firstNumber = null;
-let secondNumber = null;
+let firstNumber = "";
+let secondNumber = "";
 
 function add(number1, number2) {
 
@@ -52,11 +52,25 @@ function insertNumber(number) {
 }
 
 function storeNumber(opi) {
+    if(prevOutput !="") {
+        alert("do maths");
+        tempMaths(Number(prevOutput), Number(displayOutput));
+    } else {
+        alert("don't do maths");
+        prevOutput = displayOutput;
+        currentOperation = opi;
+        printDisplay();
+        displayOutput = "";
+    }
     
 }
 
+function tempMaths(a , b) {
+    alert(a+b);
+}
+
 function printDisplay() {
-    lastDisplay.textContent = prevOutput;
+    lastDisplay.textContent = prevOutput + currentOperation;
     mainDisplay.textContent = displayOutput;   
 }
 
