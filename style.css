@@ -15,18 +15,29 @@ main {
     height: 100%;
 }
 
+.calcContainer {
+    background-color: rgb(177, 177, 177);
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid black;
+}
+
 .display {
     display: flex;
     flex-direction: column;
     justify-content:center;
     align-items: flex-end;
-    border: 3px solid blue;
+    border: 3px solid black;
+    margin-bottom: 10px;
+    background-color: rgb(238, 237, 237);
+    padding: 30px;
 }
 
 .buttonArea {
     display: grid;
     grid-template-columns: repeat(4,auto);
     grid-template-rows: repeat(5,auto);
+    gap: 10px;
 }
 
 .span-2 {
@@ -34,11 +45,28 @@ main {
   }
 
 .numberButtons {
-    border: 1px solid red;
+    border: 3px solid black;
     padding: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    background-color: aliceblue;
+    transition-duration: 0.1s;
+    user-select: none;
+}
+
+.clicker {
+    border: 3px solid rgb(5, 197, 197);
+    transform: scale(1.1,1.1);
+}
+
+#clear {
+    background-color: rgb(255, 45, 45);
+}
+
+#delete {
+    background-color: rgba(155, 18, 155, 0.555);
 }
 
 footer {

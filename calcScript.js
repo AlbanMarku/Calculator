@@ -1,3 +1,5 @@
+const numButt = document.querySelectorAll(".numberButtons");
+
 function add(number1, number2) {
 
 }
@@ -33,3 +35,15 @@ function operate(number1, op, number2) {
             alert("idk what is happening");
     }
 }
+
+numButt.forEach(element => {
+    element.addEventListener("click", () =>{
+        element.classList.add("clicker");
+    });
+});
+
+numButt.forEach(element => { 
+    element.addEventListener("transitionend", () => {
+        element.classList.remove("clicker");
+    });
+});
