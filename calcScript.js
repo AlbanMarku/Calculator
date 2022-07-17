@@ -85,6 +85,29 @@ function printDisplay(prev, cur) {
     mainDisplay.textContent = cur;   
 }
 
+function setOperations(opi) {
+        opi = opi.trim();
+        if (currentOperation === "") {
+            currentOperation = opi;
+            prevOutput = displayOutput;
+            printDisplay(prevOutput, displayOutput);
+            displayOutput = "";
+        } else if (currentOperation !== "" && prevOutput !== "" && displayOutput !== "") {
+            operate(currentOperation);
+            currentOperation = opi;
+            
+        } else {
+            console.log(displayOutput);
+            console.log(prevOutput);
+            console.log(currentOperation);
+        }
+}
+
+function equalOperation() {
+    operate(currentOperation);
+    displayOutput = prevOutput;
+}
+
 numButt.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
@@ -101,21 +124,7 @@ numButt.forEach(element => {
 opper.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
-        let trimmedOpi = element.textContent.trim();
-        if (currentOperation === "") {
-            currentOperation = trimmedOpi;
-            prevOutput = displayOutput;
-            printDisplay(prevOutput, displayOutput);
-            displayOutput = "";
-        } else if (currentOperation !== "" && prevOutput !== "" && displayOutput !== "") {
-            operate(currentOperation);
-            currentOperation = trimmedOpi;
-            
-        } else {
-            console.log(displayOutput);
-            console.log(prevOutput);
-            console.log(currentOperation);
-        }
+        setOperations(element.textContent);
     });
 });
 
@@ -128,8 +137,7 @@ opper.forEach(element => {
 equaler.addEventListener("click", () => {
     equaler.classList.add("clicker");
     if(prevOutput !== "" && displayOutput !== "" && currentOperation !== "") {
-        operate(currentOperation);
-        displayOutput = prevOutput;
+        equalOperation();
     }
 });
 
@@ -145,3 +153,26 @@ clearer.addEventListener("click", () => {
 clearer.addEventListener("transitionend", () => {
     clearer.classList.remove("clicker");
 })
+
+document.addEventListener("keydown", (e) => {
+    console.log(e);
+    if (e.key >= 0 && e.key <= 9 || e.key === ".") {
+        insertNumber(e.key);
+    }
+
+    if(e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        setOperations(e.key);
+    }
+
+    if(e.key === "=" || e.key === "Enter") {
+        equalOperation();
+    }
+
+    if(e.key === "Escape") {
+        clear();
+    }
+
+    if(e.key === "Backspace") {
+        //do delete
+    }
+});
