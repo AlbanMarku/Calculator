@@ -4,13 +4,17 @@ const mainDisplay = document.querySelector(".mainDisplay");
 const lastDisplay = document.querySelector(".lastDisplay");
 const clearer = document.querySelector("[data-clear]");
 
-
 let displayOutput = "";
 let prevOutput = "";
 let currentOperation = "";
 
-function add(number1, number2) {
-
+function add(a, b) {
+    let calc = a+b;
+    calc = calc.toString();
+    currentOperation = "";
+    printDisplay(calc, calc);
+    prevOutput = calc;
+    displayOutput = "";
 }
 
 function subtract(number1, number2) {
@@ -32,10 +36,10 @@ function clear() {
     printDisplay(prevOutput,displayOutput);
 }
 
-function operate(number1, number2) {
-    switch (currentOperation) {
+function operate(opi) {
+    switch (opi) {
         case "+":
-            add(number1,number2);
+            add(Number(prevOutput), Number(displayOutput));
             break
     
         case "-":
@@ -48,6 +52,7 @@ function operate(number1, number2) {
             multiply(number1, number2);
             break
         default:
+            console.log(opi);
             alert("idk what is happening");
     }
 }
@@ -60,9 +65,9 @@ function insertNumber(number) {
 
 function storeNumber(opi) {
     if(prevOutput !="") {
-        tempMaths(Number(prevOutput), Number(displayOutput));
+        //tempMaths(Number(prevOutput), Number(displayOutput));
+        operate(currentOperation);
     } else {
-        console.log(displayOutput);
         prevOutput = displayOutput;
         currentOperation = opi;
         printDisplay(prevOutput, displayOutput);
@@ -101,7 +106,10 @@ numButt.forEach(element => {
 opper.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
-        storeNumber(element.textContent);
+        let trimmedOpi = element.textContent.trim();
+        currentOperation = trimmedOpi;
+        console.log(trimmedOpi);
+        storeNumber(trimmedOpi);
     });
 });
 
