@@ -66,7 +66,6 @@ function operate(opi) {
             multiply(Number(prevOutput), Number(displayOutput));
             break
         default:
-            console.log(opi);
             alert("idk what is happening");
     }
 }
@@ -100,6 +99,7 @@ function setOperations(opi) {
             console.log(displayOutput);
             console.log(prevOutput);
             console.log(currentOperation);
+            alert("What happened?");
         }
 }
 
@@ -155,7 +155,6 @@ clearer.addEventListener("transitionend", () => {
 })
 
 document.addEventListener("keydown", (e) => {
-    console.log(e);
     if (e.key >= 0 && e.key <= 9 || e.key === ".") {
         insertNumber(e.key);
     }
