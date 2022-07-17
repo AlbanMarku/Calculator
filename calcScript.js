@@ -3,6 +3,7 @@ const opper = document.querySelectorAll("[data-operation]");
 const mainDisplay = document.querySelector(".mainDisplay");
 const lastDisplay = document.querySelector(".lastDisplay");
 const clearer = document.querySelector("[data-clear]");
+const equaler = document.querySelector("[data-equals]");
 
 let displayOutput = "";
 let prevOutput = "";
@@ -86,18 +87,6 @@ function printDisplay(prev, cur) {
     mainDisplay.textContent = cur;   
 }
 
-function storeNumber(opi) {
-    if(prevOutput !="") {
-        //tempMaths(Number(prevOutput), Number(displayOutput));
-        operate(currentOperation);
-    } else {
-        prevOutput = displayOutput;
-        printDisplay(prevOutput, displayOutput);
-        displayOutput = "";
-    }
-    
-}
-
 numButt.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
@@ -115,7 +104,7 @@ opper.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
         let trimmedOpi = element.textContent.trim();
-        if (currentOperation === "" && displayOutput !== "") {
+        if (currentOperation === "") {
             currentOperation = trimmedOpi;
             prevOutput = displayOutput;
             printDisplay(prevOutput, displayOutput);
@@ -123,6 +112,8 @@ opper.forEach(element => {
         } else if (currentOperation !== "" && prevOutput !== "" && displayOutput !== "") {
             operate(currentOperation);
             currentOperation = trimmedOpi;
+            
+        } else {
             console.log(displayOutput);
             console.log(prevOutput);
             console.log(currentOperation);
@@ -134,6 +125,18 @@ opper.forEach(element => {
     element.addEventListener("transitionend", () => {
         element.classList.remove("clicker");
     });
+});
+
+equaler.addEventListener("click", () => {
+    equaler.classList.add("clicker");
+    if(prevOutput !== "" && displayOutput !== "" && currentOperation !== "") {
+        operate(currentOperation);
+        displayOutput = prevOutput;
+    }
+});
+
+equaler.addEventListener("transitionend", () => {
+    equaler.classList.remove("clicker");
 });
 
 clearer.addEventListener("click", () => {
