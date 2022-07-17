@@ -20,8 +20,14 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
-    let calc = a/b;
-    results(calc);
+    if (a === 0 || b === 0) {
+        clear();
+        mainDisplay.textContent = "You can't divide by zero.";
+    } else {
+        let calc = a/b;
+        results(calc);
+    }
+
 }
 
 function multiply(a, b) {
@@ -69,17 +75,6 @@ function insertNumber(number) {
     number = number.trim();
     displayOutput = displayOutput.concat(number.toString());
     printDisplay(prevOutput, displayOutput);
-}
-
-
-
-function tempMaths(a , b) {
-    let calc = a+b;
-    calc = calc.toString();
-    //currentOperation = "";
-    printDisplay(calc, calc);
-    prevOutput = calc;
-    displayOutput = "";
 }
 
 function printDisplay(prev, cur) {
