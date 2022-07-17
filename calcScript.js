@@ -10,23 +10,22 @@ let currentOperation = "";
 
 function add(a, b) {
     let calc = a+b;
-    calc = calc.toString();
-    currentOperation = "";
-    printDisplay(calc, calc);
-    prevOutput = calc;
-    displayOutput = "";
+    results(calc);
 }
 
-function subtract(number1, number2) {
-
+function subtract(a, b) {
+    let calc = a-b;
+    results(calc);
 }
 
-function divide(number1, number2) {
-
+function divide(a, b) {
+    let calc = a/b;
+    results(calc);
 }
 
-function multiply(number1, number2) {
-
+function multiply(a, b) {
+    let calc = a*b;
+    results(calc);
 }
 
 function clear() {
@@ -36,6 +35,14 @@ function clear() {
     printDisplay(prevOutput,displayOutput);
 }
 
+function results(calc) {
+    calc = calc.toString();
+    currentOperation = "";
+    printDisplay(calc, calc);
+    prevOutput = calc;
+    displayOutput = "";
+}
+
 function operate(opi) {
     switch (opi) {
         case "+":
@@ -43,13 +50,13 @@ function operate(opi) {
             break
     
         case "-":
-            subtract(number1, number2);
+            subtract(Number(prevOutput), Number(displayOutput));
             break
         case "/":
-            divide(number1, number2);
+            divide(Number(prevOutput), Number(displayOutput));
             break
         case "*":
-            multiply(number1, number2);
+            multiply(Number(prevOutput), Number(displayOutput));
             break
         default:
             console.log(opi);
@@ -63,18 +70,7 @@ function insertNumber(number) {
     printDisplay(prevOutput, displayOutput);
 }
 
-function storeNumber(opi) {
-    if(prevOutput !="") {
-        //tempMaths(Number(prevOutput), Number(displayOutput));
-        operate(currentOperation);
-    } else {
-        prevOutput = displayOutput;
-        currentOperation = opi;
-        printDisplay(prevOutput, displayOutput);
-        displayOutput = "";
-    }
-    
-}
+
 
 function tempMaths(a , b) {
     let calc = a+b;
@@ -88,6 +84,18 @@ function tempMaths(a , b) {
 function printDisplay(prev, cur) {
     lastDisplay.textContent = prev + currentOperation;
     mainDisplay.textContent = cur;   
+}
+
+function storeNumber(opi) {
+    if(prevOutput !="") {
+        //tempMaths(Number(prevOutput), Number(displayOutput));
+        operate(currentOperation);
+    } else {
+        prevOutput = displayOutput;
+        printDisplay(prevOutput, displayOutput);
+        displayOutput = "";
+    }
+    
 }
 
 numButt.forEach(element => {
@@ -107,9 +115,18 @@ opper.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
         let trimmedOpi = element.textContent.trim();
-        currentOperation = trimmedOpi;
-        console.log(trimmedOpi);
-        storeNumber(trimmedOpi);
+        if (currentOperation === "" && displayOutput !== "") {
+            currentOperation = trimmedOpi;
+            prevOutput = displayOutput;
+            printDisplay(prevOutput, displayOutput);
+            displayOutput = "";
+        } else if (currentOperation !== "" && prevOutput !== "" && displayOutput !== "") {
+            operate(currentOperation);
+            currentOperation = trimmedOpi;
+            console.log(displayOutput);
+            console.log(prevOutput);
+            console.log(currentOperation);
+        }
     });
 });
 
