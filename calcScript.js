@@ -71,8 +71,11 @@ function operate(opi) {
     }
 }
 
-function insertNumber(number) {
+function insertNumber(number) {    
     number = number.trim();
+    if(number === "." && displayOutput.includes(".")) {
+        return
+    }
     displayOutput = displayOutput.concat(number.toString());
     printDisplay(prevOutput, displayOutput);
 }
