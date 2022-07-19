@@ -4,6 +4,7 @@ const mainDisplay = document.querySelector(".mainDisplay");
 const lastDisplay = document.querySelector(".lastDisplay");
 const clearer = document.querySelector("[data-clear]");
 const equaler = document.querySelector("[data-equals]");
+const deleter = document.querySelector("[data-delete]");
 
 let displayOutput = "";
 let prevOutput = "";
@@ -108,6 +109,11 @@ function equalOperation() {
     displayOutput = prevOutput;
 }
 
+function removeLastNumber() {
+    displayOutput = displayOutput.slice(0,-1);
+    printDisplay(prevOutput, displayOutput);
+}
+
 numButt.forEach(element => {
     element.addEventListener("click", () =>{
         element.classList.add("clicker");
@@ -172,6 +178,15 @@ document.addEventListener("keydown", (e) => {
     }
 
     if(e.key === "Backspace") {
-        //do delete
+       removeLastNumber();
     }
+});
+
+deleter.addEventListener("click", () => {
+    removeLastNumber();
+    deleter.classList.add("clicker");
+});
+
+deleter.addEventListener("transitionend", () => {
+    deleter.classList.remove("clicker");
 });
